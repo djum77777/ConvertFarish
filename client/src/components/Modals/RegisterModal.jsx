@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './RegisterModal.css';
+import { message } from 'antd';
 
 const RegisterModal = () => {
 
@@ -15,9 +16,9 @@ const RegisterModal = () => {
 		const res = await postRegister(formRegister);
 
 		if (res.message) {
-			alert (res.response.data.message);
+		 	message.error (res.response.data.message);
 		} else {
-			alert (res.data.message);
+			message.success ('Registration successed!!');
 			navigate('/login');
 		};
 	};

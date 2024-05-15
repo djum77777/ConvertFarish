@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './LoginModal.css';
+import { message } from 'antd';
 
 const LoginModal = () => {
 
@@ -15,9 +16,10 @@ const LoginModal = () => {
 		const res = await postLogin(formLogin);
 
 		if (res.response) {
-			alert (res.response.data.message);
+			message.error (res.response.data.message);
 		} else {
 			localStorage.setItem('accessToken', res.data.data.accessToken);
+			message.success('Login successfully!')
 			navigate('/transactions');
 		};
 	};

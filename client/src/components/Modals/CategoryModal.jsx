@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 import { DataContext } from '../../context/DataContext';
+import { message } from 'antd';
 import './CategoryModal.css';
 
 const CategoryModal = () => {
@@ -53,10 +54,11 @@ const CategoryModal = () => {
 		if (modalAdd && modalForm === 'plus') {
 			const res = await postIncome(formCategory, token);
 			if (res.response) {
-				alert(res.response.data.message);
+				message.error(res.response.data.message);
 				setLoad(false);
 			} else {
 				const data = await getIncomes(token);
+				message.success('New income category added!')
 				setIncomes(data);
 				setLoad(false);
 				setModal(false);
@@ -64,10 +66,11 @@ const CategoryModal = () => {
 		} else if (modalAdd && modalForm === 'minus') {
 			const res = await postExpense(formCategory, token);
 			if (res.response) {
-				alert(res.response.data.message);
+				message.error(res.response.data.message);
 				setLoad(false);
 			} else {
 				const data = await getExpenses(token);
+				message.success('New expense category added!')
 				setExpenses(data);
 				setLoad(false);
 				setModal(false);
@@ -75,10 +78,11 @@ const CategoryModal = () => {
 		} else if (!modalAdd && modalForm === 'plus') {
 			const res = await putIncome(modalInput.income_id, formCategory, token);
 			if (res.response) {
-				alert(res.response.data.message);
+				message.error(res.response.data.message);
 				setLoad(false);
 			} else {
 				const data = await getIncomes(token);
+				message.success('Income category successfully updated!')
 				setIncomes(data);
 				setLoad(false);
 				setModal(false);
@@ -86,10 +90,11 @@ const CategoryModal = () => {
 		} else if (!modalAdd && modalForm === 'minus') {
 			const res = await putExpense(modalInput.expense_id, formCategory, token);
 			if (res.response) {
-				alert(res.response.data.message);
+				message.error(res.response.data.message);
 				setLoad(false);
 			} else {
 				const data = await getExpenses(token);
+				message.success('Expense category successfully updated!')
 				setExpenses(data);
 				setLoad(false);
 				setModal(false);

@@ -2,11 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 import { DataContext } from '../../context/DataContext';
 import './TransactionModal.css';
+import { message } from 'antd';
 
 const TransactionModal = () => {
-
 	const { setLoad } = useContext(GlobalContext);
-
 	const {
 		token,
 		setTransactions,
@@ -36,7 +35,6 @@ const TransactionModal = () => {
 		top: '50%',
         transition: 'top 400ms ease-out'
 	};
-
 	useEffect(() => {
 		const getData = async () => {
 			const expenseData = await getExpenses(token);
@@ -47,10 +45,8 @@ const TransactionModal = () => {
 			setAccounts(accountData);
 		};
 		getData();
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [token])
-
 	const handleResetFile = () => {
 		if (inputFile.current) {
 			inputFile.current.value = '';
@@ -59,7 +55,6 @@ const TransactionModal = () => {
 			setModalInput({...modalInput, transaction_bill: ''});
 		};
 	};
-
 	const handleDeleteBill = () => {
 		if (inputFile.current) {
 			inputFile.current.value = '';
@@ -69,23 +64,21 @@ const TransactionModal = () => {
 		};
 		setModalInput({...modalInput, transaction_image: ''});
 	};
-
 	const handleSubmit = async (e) => {
-
 		e.preventDefault();
 		setLoad(true);
 		const formTrans = new FormData(e.target);
-
 		if (modalAdd) {
 			if (modalInput.transaction_bill !== '' && modalInput.transaction_bill !== undefined) {
 				formTrans.append('transaction_bill', modalInput.transaction_bill);
 			};
 			const res = await postTransaction(formTrans, token);
 			if (res.response) {
-				alert(res.response.data.message);
+				message.error(res.response.data.message);
 				setLoad(false);
 			} else {
 				const data = await getTransactions(token);
+				message.success('New transaction is posted!')
 				setTransactions(data);
 				setLoad(false);
 				setModal(false);
@@ -98,17 +91,17 @@ const TransactionModal = () => {
 			};
 			const res = await putTransaction(modalInput.transaction_id, formTrans, token);
 			if (res.response) {
-				alert(res.response.data.message);
+				message.error(res.response.data.message);
 				setLoad(false);
 			} else {
 				const data = await getTransactions(token);
+				message.success('Transaction successfully updated')
 				setTransactions(data);
 				setLoad(false);
 				setModal(false);
 			};
 		};
 	};
-
 	return (
 		<div className='modal tra' style={modal ? styleModal : {}}>
 

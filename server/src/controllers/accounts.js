@@ -29,7 +29,7 @@ exports.createAccount = async (req, res) => {
 			const nameCheck = await nameAccount(req.userid, false, req.body.account_name);
 			if (nameCheck) {
 				res.status(500).json({
-					message: 'there are already account with that name, change with another unique name',
+					message: 'This account name is already existed!',
 					data: { account_name: req.body.account_name }
 				});
 			} else {
@@ -69,7 +69,7 @@ exports.updateAccount = async (req, res) => {
 				const nameCheck = await nameAccount(req.userid, req.params.id, req.body.account_name);
 				if (nameCheck) {
 					res.status(500).json({
-						message: 'there are already account with that name, change with another unique name',
+						message: 'This account name is already existed!',
 						data: { account_name: body.account_name }
 					});
 				} else {

@@ -1,9 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { DataContext } from '../../context/DataContext';
 import './AccountTable.css';
+import { message } from 'antd';
+import { GlobalContext } from '../../context/GlobalContext';
 
 const AccountTable = () => {
-
+	const { setLoad } = useContext(GlobalContext);
 	const {
 		token,
 		accounts,
@@ -13,7 +15,6 @@ const AccountTable = () => {
 		setModalForm,
 		modalInput,
 		setModalInput,
-		setLoad,
 		getAccounts,
 		deleteAccount
 	} = useContext(DataContext);
@@ -49,10 +50,11 @@ const AccountTable = () => {
 		setLoad(true);
 		const res = await deleteAccount(id, token);
 		if (res.response) {
-			alert(res.response.data.message);
+			message.error(res.response.data.message);
 			setLoad(false);
 		} else {
 			const data = await getAccounts(token);
+			message.success('Account successfully deleted!')
 			setAccounts(data);
 			setLoad(false);
 			setModal(false);
