@@ -26,47 +26,6 @@
         justify-content: center;
     }
 
-    form {
-        width: 100%;
-        display: flex;
-		flex-direction: column;
-		align-items: center;
-
-        > label {
-            height: 2rem;
-            width: 80%;
-			margin: 0.5rem 0 0.5rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-
-            input {
-                height: 100%;
-                width: 65%;
-                padding: 0 0.5rem 0 0.5rem;
-            }
-        }
-
-        > button {
-            background: rgb(10, 10, 10);
-            color: white;
-            padding: 0.8rem;
-			margin: 0.5rem 0 0.5rem 0;
-            border: 2px dashed white;
-            border-radius: 2px;
-            transition: background 200ms ease;
-        }
-
-        > button:hover {
-            background: #1454DC;
-            padding: calc(0.8rem + 2px);
-            border: none;
-            cursor: pointer;
-            transition: background 200ms ease;
-        }
-    }
-
 	.form-footer {
 		width: 100%;
 		padding: 0.5rem 0 1.5rem 0;
@@ -74,6 +33,10 @@
 		justify-content: center;
 	}
 
+    .btn{
+        padding-top: 0;
+    }
+    
     .log-link {
         color: #1454DC;
         text-decoration: none;
