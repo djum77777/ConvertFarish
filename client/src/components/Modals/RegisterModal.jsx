@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './RegisterModal.css';
+import Logo from './logo-standard.png';
 import { Form,Button, Input, message } from 'antd';
 
 const RegisterModal = () => {
@@ -27,6 +28,7 @@ const RegisterModal = () => {
 
 	return (
 		<div className='reg-modal'>
+			<img src={Logo} alt='logo' className='LogoImg'></img>
 			<div className="form-header">Register</div>
 			<Form layout='vertical' onFinish={handleSubmit} autoComplete='off'>
             <Form.Item label={<label style={{ color:"white"}}>Full Name : </label>}  

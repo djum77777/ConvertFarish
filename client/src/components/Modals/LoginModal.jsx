@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './LoginModal.css';
+import Logo from './logo-standard.png';
 import { Button, Form, Input, message } from 'antd';
 
 const LoginModal = () => {
@@ -26,15 +27,14 @@ const LoginModal = () => {
 
 	return (
 		<div className='log-modal'>
-
+			<img src={Logo} alt='logo' className='LogoImg'></img>
 			<div className="form-header">Login</div>
-
-			<Form layout='vertical' onFinish={handleSubmit} autoComplete='off'>
-    			<Form.Item  
+			<Form layout='vertical'onFinish={handleSubmit} autoComplete='off'>
+    			<Form.Item 
 				label={<label style={{ color:"white"}}>Email : </label>} 
 				name='user_email' rules={[
               	{
-                    required:true,
+					required:true,
                     message:'Please input your Email!'
                 },
                 {
